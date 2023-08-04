@@ -1,42 +1,86 @@
 # -*- coding: utf-8 -*-
+import sys  # 220716 GONGYE Heyu
+import os
+from time import time, localtime, sleep
+import random
+import string
+import socket
+from os import system
+
+
 def t0():
-    #获取现在时间戳
+    # 获取现在时间戳
     import time
     t0 = time.time()
     return t0
+
+
 ti0 = t0()
 
 ver = '23'
 mainame = 'medor-ltools'
 
-from os import system
-import socket
-import os 
-import string
-import random
-from time import time, localtime, sleep
-import sys  #220716 GONGYE Heyu
+
+def sysinfo(ask):
+    import platform
+
+    if ask == 's_platform':
+        # 操作系统及版本信息 eg.Linux-5.15.0-1042-azure-x86_64-with-glibc2.31
+        s_platform = platform.platform()
+        return s_platform
+    elif ask == 's_platver':
+        # 获取系统版本号 eg.#49-Ubuntu SMP Tue Jul 11 17:28:46 UTC 2023
+        s_platver = platform.version()
+        return s_platver
+    elif ask == 's_system':
+        # 获取系统名称 eg.Linux
+        s_system = platform.system()
+        return s_system
+    elif ask == 't_architecture':
+        # 系统位数 eg.('64bit', 'ELF')
+        # type=tuple
+        t_architecture = platform.architecture()
+        return t_architecture
+    elif ask == 's_machine':
+        # 计算机类型 eg.x86_64
+        s_machine = platform.machine()
+        return s_machine
+    elif ask == 's_hostname':
+        # 计算机名称 eg.codespaces-e8945d
+        s_hostname = platform.node()
+        return s_hostname
+    elif ask == 's_processor':
+        # 处理器类型 eg.x86_64
+        s_processor = platform.processor()
+        return s_processor
+    elif ask == 'x_uname':
+        # 计算机相关信息 eg.uname_result(system='Linux', node='codespaces-e8945d', release='5.15.0-1042-azure', version='#49-Ubuntu SMP Tue Jul 11 17:28:46 UTC 2023', machine='x86_64')
+        # type=<class 'platform.uname_result'>
+        x_uname = platform.uname()
+        return x_uname
+
 
 def start():
     cls()
-    print ('''
+    print('''
     0.退出
     1.应用程序
     2.时钟''')
     startcho = int(input("请输入数字来执行你的操作"))
     if startcho == 0:
-        cls()   #220701 GONGYE Heyu
+        cls()  # 220701 GONGYE Heyu
         print("感谢使用,再见")
-    elif  startcho == 1:
-        cls()   #220701 GONGYE Heyu
+    elif startcho == 1:
+        cls()  # 220701 GONGYE Heyu
         apps()
     elif startcho == 2:
-        cls()   #220701 GONGYE Heyu
+        cls()  # 220701 GONGYE Heyu
         clock()
     else:
-         input("输入错误")
-         cls()
-         start()
+        input("输入错误")
+        cls()
+        start()
+
 
 def apps():
     cls()
@@ -51,18 +95,18 @@ def apps():
     8.关于
     9.随机字符生成
     10.时钟''')
-    #“时钟” 220701 GONGYE Heyu
+    # “时钟” 220701 GONGYE Heyu
     appscho = int(input("请输入"))
     if appscho == 1:
         系统信息()
     elif appscho == 3:
-        #本地连接()
-        网络信息()  #220701 GONGYE Heyu
+        # 本地连接()
+        网络信息()  # 220701 GONGYE Heyu
     elif appscho == 4:
         清理垃圾()
     elif appscho == 5:
-        #写入文件()
-        文件编辑()  #220701 GONGYE Heyu
+        # 写入文件()
+        文件编辑()  # 220701 GONGYE Heyu
     elif appscho == 6:
         Windows修复()
     elif appscho == 7:
@@ -72,27 +116,30 @@ def apps():
     elif appscho == 9:
         随机字符生成()
     elif appscho == 10:
-        clock()    #220701 GONGYE Heyu
-    else :
+        clock()  # 220701 GONGYE Heyu
+    else:
         input("输入错误")
         cls()
         apps()
 
+
 def 系统信息():
     cls()
     import platform
-    def showinfo(tip, info):
-        print("{}:{}".format(tip,info))
 
-    showinfo("操作系统及版本信息",platform.platform())
-    showinfo('获取系统版本号',platform.version())
+    def showinfo(tip, info):
+        print("{}:{}".format(tip, info))
+
+    showinfo("操作系统及版本信息", platform.platform())
+    showinfo('获取系统版本号', platform.version())
     showinfo('获取系统名称', platform.system())
     showinfo('系统位数', platform.architecture())
     showinfo('计算机类型', platform.machine())
     showinfo('计算机名称', platform.node())
     showinfo('处理器类型', platform.processor())
     showinfo('计算机相关信息', platform.uname())
-    back(1) #220716 GONGYE Heyu
+    back(1)  # 220716 GONGYE Heyu
+
 
 def 网络信息():
     cls()
@@ -104,12 +151,14 @@ def 网络信息():
     print("IP地址" + ip)
     print(os.system('netstat -sera'))
     print(os.system('ipconfig /all'))
-    back(1) #220716 GONGYE Heyu
-#220701 GONGYE Heyu
+    back(1)  # 220716 GONGYE Heyu
+# 220701 GONGYE Heyu
+
 
 def 清理垃圾():
     print("开发中...")
     back(1)
+
 
 def 文件编辑():
     cls()
@@ -138,82 +187,92 @@ def 文件编辑():
         print("文件删除完成")
         文件编辑()
     elif i == 'b':
-        back(1) #220716 GONGYE Heyu
+        back(1)  # 220716 GONGYE Heyu
     else:
         print("输入错误")
         文件编辑()
-    #220701 GONGYE Heyu
+    # 220701 GONGYE Heyu
+
 
 def Windows修复():
     cls()
     print("不可用")
-    back(1) #220716 GONGYE Heyu
+    back(1)  # 220716 GONGYE Heyu
+
 
 def 随机字符生成():
     cls()
-    #生成字典a-z
-    a=string.ascii_lowercase
-    #生成字典0-9
-    b=string.digits
-    #生成字典A-Z
-    c=string.ascii_uppercase
-    #生成字典符号
-    d=string.punctuation
-    #生成字典所有
-    f=a+b+c+d
-    #输入需要生成的字符长度
-    n=int(input('请输入需要生成的字符长度：'))
-    #生成
-    p=''
+    # 生成字典a-z
+    a = string.ascii_lowercase
+    # 生成字典0-9
+    b = string.digits
+    # 生成字典A-Z
+    c = string.ascii_uppercase
+    # 生成字典符号
+    d = string.punctuation
+    # 生成字典所有
+    f = a+b+c+d
+    # 输入需要生成的字符长度
+    n = int(input('请输入需要生成的字符长度：'))
+    # 生成
+    p = ''
     for i in range(n):
-        p+=f[random.randint(0,len(f)-1)]
-    #输出字符
-    print('生成的字符为：',p)
-    #输出字符长度
-    print('生成的字符长度为：',len(p))
-    back(1) #220716 GONGYE Heyu
+        p += f[random.randint(0, len(f)-1)]
+    # 输出字符
+    print('生成的字符为：', p)
+    # 输出字符长度
+    print('生成的字符长度为：', len(p))
+    back(1)  # 220716 GONGYE Heyu
+
 
 def clock():
     cls()
+
     class Clock(object):
         """数字时钟"""
-        def __init__(self,hour=0,minute=0,second=0):
+
+        def __init__(self, hour=0, minute=0, second=0):
             """
             构造器
             :param hour: 时
             :param minute: 分
             :param second: 秒
             """
-            self._hour=hour
-            self._minute=minute
-            self._second=second
+            self._hour = hour
+            self._minute = minute
+            self._second = second
+
         @classmethod
         def now(cls):
             ctime = localtime(time())
             return cls(ctime.tm_hour, ctime.tm_min, ctime.tm_sec)
+
         def run(self):
             """走字"""
-            self._second+=1
-            if self._second==60:
-                self._second=0
-                self._minute+=1
+            self._second += 1
+            if self._second == 60:
+                self._second = 0
+                self._minute += 1
                 if self._minute == 60:
-                    self._minute=0
-                    self._hour+=1
-                    if self._hour==24:
-                        self._hour=0           
+                    self._minute = 0
+                    self._hour += 1
+                    if self._hour == 24:
+                        self._hour = 0
         """时钟打印"""
+
         def __str__(self):
             cls()
-            return '%02d:%02d:%02d' % (self._hour,self._minute,self._second)
+            return '%02d:%02d:%02d' % (self._hour, self._minute, self._second)
+
     def main():
-        clock=Clock.now()
+        clock = Clock.now()
         while True:
             print(clock)
             sleep(1)
             clock.run()
     if __name__ == '__main__':
         main()
+
 
 def 关于():
     cls()
@@ -231,29 +290,31 @@ def 关于():
     if i == 'a':
         cls()
         print(license)
-        back(3) #220716 GONGYE Heyu
+        back(3)  # 220716 GONGYE Heyu
     elif i == 'b':
         cls()
         print(uplog)
-        back(3) #220716 GONGYE Heyu
+        back(3)  # 220716 GONGYE Heyu
     elif i == 'c':
         global ti0
         global ti
         cls()
         print(ti-ti0)
         back(3)
-    else :
-        back(0) #220716 GONGYE Heyu
+    else:
+        back(0)  # 220716 GONGYE Heyu
+
 
 def cls():
     system('clear')
 
+
 def back(where):
     w = sys._getframe(1).f_code.co_name
-    #where=0为直接返回主菜单，where=1为询问后返回主菜单#
-    #where=2为直接返回上一级菜单,where=3为询问后返回上一级菜单
+    # where=0为直接返回主菜单，where=1为询问后返回主菜单#
+    # where=2为直接返回上一级菜单,where=3为询问后返回上一级菜单
     if where == 0:
-        cls() 
+        cls()
         apps()
     elif where == 1:
         input("按任意键返回")
@@ -261,7 +322,7 @@ def back(where):
         apps()
     elif where == 2:
         cls()
-        #调用w中的函数名
+        # 调用w中的函数名
         globals()[w]()
     elif where == 3:
         input("按任意键返回")
@@ -270,7 +331,8 @@ def back(where):
     else:
         print("输入错误")
         back(3)
-#220716 GONGYE Heyu
+# 220716 GONGYE Heyu
+
 
 uplog = '''
 更新日志：
@@ -296,12 +358,15 @@ uplog = '''
 
 license = "已撤销"
 
+
 def t():
     import time
     t = time.time()
     return t
+
+
 ti = t()
 
 start()
 
-#判断操作系统
+# 判断操作系统
