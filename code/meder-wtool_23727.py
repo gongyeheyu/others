@@ -58,6 +58,10 @@ def sysinfo(ask):
         # type=<class 'platform.uname_result'>
         x_uname = platform.uname()
         return x_uname
+    elif ask == 's_py_ver':
+        # 获取python版本
+        s_py_ver = platform.python_version()
+        return s_py_ver
 
 
 def start():
@@ -125,19 +129,16 @@ def apps():
 
 def 系统信息():
     cls()
-    import platform
-
-    def showinfo(tip, info):
-        print("{}:{}".format(tip, info))
-
-    showinfo("操作系统及版本信息", platform.platform())
-    showinfo('获取系统版本号', platform.version())
-    showinfo('获取系统名称', platform.system())
-    showinfo('系统位数', platform.architecture())
-    showinfo('计算机类型', platform.machine())
-    showinfo('计算机名称', platform.node())
-    showinfo('处理器类型', platform.processor())
-    showinfo('计算机相关信息', platform.uname())
+    print(sysinfo("s_platform"))
+    print(sysinfo("s_platver"))
+    print(sysinfo("s_system"))
+    print(sysinfo("t_architecture"))
+    print(sysinfo("s_machine"))
+    print(sysinfo("s_hostname"))
+    print(sysinfo("s_machine"))
+    print(sysinfo("s_processor"))
+    print(sysinfo("x_uname"))
+    print("Python版本 " + sysinfo("s_py_ver"))
     back(1)  # 220716 GONGYE Heyu
 
 
