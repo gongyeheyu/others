@@ -151,8 +151,9 @@ def 网络信息():
     ip = socket.gethostbyname(hostname)
     print("主机名" + hostname)
     print("IP地址" + ip)
-    print(os.system('netstat -sera'))
-    print(os.system('ipconfig /all'))
+    if sysinfo("s_system") == "Windows":
+        print(os.system('netstat -sera'))
+        print(os.system('ipconfig /all'))
     back(1)  # 220716 GONGYE Heyu
 # 220701 GONGYE Heyu
 
