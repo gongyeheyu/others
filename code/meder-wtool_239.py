@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
-from time import time, localtime, sleep
-import random
-import string
-import socket
-from os import system
-
 
 def t0():
     # 获取现在时间戳
@@ -13,16 +6,13 @@ def t0():
     f_t0 = time.time()
     return f_t0
 
-
 f_ti0 = t0()
 
 s_ver = '23.9'
 s_mainame = 'medor-tools'
 
-
 def sysinfo(s_ask):
     import platform
-
     if s_ask == 's_platform':
         # 操作系统及版本信息 eg.Linux-5.15.0-1042-azure-x86_64-with-glibc2.31
         s_platform = platform.platform()
@@ -62,7 +52,6 @@ def sysinfo(s_ask):
         s_py_ver = platform.python_version()
         return s_py_ver
 
-
 def start():
     cls()
     print(s_mainame + " " + s_ver + 
@@ -85,48 +74,46 @@ def start():
         cls()
         start()
 
-
 def apps():
     cls()
     print('''
-    1.系统信息
-    2.网络信息
-    3.清理垃圾
-    4.文件编辑
-    5.Windows修复
-    6.随机字符生成 
-    7.时钟           
-    0.开始
-    00.关于
+    1.开始
+    2.系统信息
+    3.网络信息
+    4.清理垃圾
+    5.文件编辑
+    6.Windows修复
+    7.随机字符生成 
+    8.时钟           
+    0.关于
     ''')
     # “时钟” 220701 GONGYE Heyu
     i_appscho = int(input("请输入"))
     if i_appscho == 1:
-        系统信息()
+        start()
     elif i_appscho == 2:
+        系统信息()
+    elif i_appscho == 3:
         # 本地连接()
         网络信息()  # 220701 GONGYE Heyu
-    elif i_appscho == 3:
-        清理垃圾()
     elif i_appscho == 4:
+        清理垃圾()
+    elif i_appscho == 5:
         # 写入文件()
         文件编辑()  # 220701 GONGYE Heyu
-    elif i_appscho == 5:
-        Windows修复()
     elif i_appscho == 6:
-        随机字符生成()
+        Windows修复()
     elif i_appscho == 7:
+        随机字符生成()
+    elif i_appscho == 8:
         clock()  # 220701 GONGYE Heyu    
     elif i_appscho == 0:
-        start()
-    elif i_appscho == 00:
         关于()
     
     else:
         input("输入错误")
         cls()
         apps()
-
 
 def 系统信息():
     cls()
@@ -142,9 +129,10 @@ def 系统信息():
     print("Python版本 " + sysinfo("s_py_ver"))
     back(1)  # 220716 GONGYE Heyu
 
-
 def 网络信息():
     cls()
+    import os
+    import socket
     # 获取本机计算机名称
     s_hostname = socket.gethostname()
     # 获取本机ip
@@ -157,14 +145,13 @@ def 网络信息():
     back(1)  # 220716 GONGYE Heyu
 # 220701 GONGYE Heyu
 
-
 def 清理垃圾():
     print("开发中...")
     back(1)
 
-
 def 文件编辑():
     cls()
+    import os
     w = input("请输入路径")
     i = input('''
     n.新建文件
@@ -196,9 +183,9 @@ def 文件编辑():
         文件编辑()
     # 220701 GONGYE Heyu
 
-
 def Windows修复():
     cls()
+    import os
     s_system = sysinfo("s_system")
     if s_system == "Linux":
         print("不可用")
@@ -206,9 +193,10 @@ def Windows修复():
         os.system("sfc /scannow")
     back(1)
 
-
 def 随机字符生成():
     cls()
+    import string
+    import random
     # 生成字典a-z
     a = string.ascii_lowercase
     # 生成字典0-9
@@ -231,10 +219,9 @@ def 随机字符生成():
     print('生成的字符长度为：', len(p))
     back(1)  # 220716 GONGYE Heyu
 
-
 def clock():
     cls()
-
+    from time import time, localtime, sleep
     class Clock(object):
         """数字时钟"""
 
@@ -288,7 +275,6 @@ def debuginfo():
     print("系统信息:" + str(sysinfo("x_uname")))
     print("python信息:" + str(sysinfo("s_py_ver")))
 
-
 def 关于():
     cls()
     print('''
@@ -299,8 +285,7 @@ def 关于():
     
     a.查看许可证
     b.更新日志
-    c.加载耗时
-    d.调试信息
+    c.调试信息
     z.返回''')
     s_i = input()
     if s_i == 'a':
@@ -312,20 +297,14 @@ def 关于():
         print(uplog)
         back(3)  # 220716 GONGYE Heyu
     elif s_i == 'c':
-        global f_ti0
-        global f_ti
-        cls()
-        print(f_ti-f_ti0)
-        back(3)
-    elif s_i == 'd':
         cls()
         debuginfo()
         back(3)
     else:
         back(0)  # 220716 GONGYE Heyu
 
-
 def cls():
+    from os import system
     system('clear')
 
 
