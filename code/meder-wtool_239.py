@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import sys  # 220716 GONGYE Heyu
 import os
 from time import time, localtime, sleep
 import random
@@ -11,54 +10,54 @@ from os import system
 def t0():
     # 获取现在时间戳
     import time
-    t0 = time.time()
-    return t0
+    f_t0 = time.time()
+    return f_t0
 
 
-ti0 = t0()
+f_ti0 = t0()
 
-ver = '23.9'
-mainame = 'medor-tools'
+s_ver = '23.9'
+s_mainame = 'medor-tools'
 
 
-def sysinfo(ask):
+def sysinfo(s_ask):
     import platform
 
-    if ask == 's_platform':
+    if s_ask == 's_platform':
         # 操作系统及版本信息 eg.Linux-5.15.0-1042-azure-x86_64-with-glibc2.31
         s_platform = platform.platform()
         return s_platform
-    elif ask == 's_platver':
+    elif s_ask == 's_platver':
         # 获取系统版本号 eg.#49-Ubuntu SMP Tue Jul 11 17:28:46 UTC 2023
         s_platver = platform.version()
         return s_platver
-    elif ask == 's_system':
+    elif s_ask == 's_system':
         # 获取系统名称 eg.Linux
         s_system = platform.system()
         return s_system
-    elif ask == 't_architecture':
+    elif s_ask == 't_architecture':
         # 系统位数 eg.('64bit', 'ELF')
         # type=tuple
         t_architecture = platform.architecture()
         return t_architecture
-    elif ask == 's_machine':
+    elif s_ask == 's_machine':
         # 计算机类型 eg.x86_64
         s_machine = platform.machine()
         return s_machine
-    elif ask == 's_hostname':
+    elif s_ask == 's_hostname':
         # 计算机名称 eg.codespaces-e8945d
         s_hostname = platform.node()
         return s_hostname
-    elif ask == 's_processor':
+    elif s_ask == 's_processor':
         # 处理器类型 eg.x86_64
         s_processor = platform.processor()
         return s_processor
-    elif ask == 'x_uname':
+    elif s_ask == 'x_uname':
         # 计算机相关信息 eg.uname_result(system='Linux', node='codespaces-e8945d', release='5.15.0-1042-azure', version='#49-Ubuntu SMP Tue Jul 11 17:28:46 UTC 2023', machine='x86_64')
         # type=<class 'platform.uname_result'>
         x_uname = platform.uname()
         return x_uname
-    elif ask == 's_py_ver':
+    elif s_ask == 's_py_ver':
         # 获取python版本
         s_py_ver = platform.python_version()
         return s_py_ver
@@ -66,19 +65,19 @@ def sysinfo(ask):
 
 def start():
     cls()
-    print(mainame + " " + ver + 
+    print(s_mainame + " " + s_ver + 
     '''
     0.退出
     1.应用程序
     2.时钟''')
-    startcho = int(input("请输入数字来执行你的操作"))
-    if startcho == 0:
+    i_startcho = int(input("请输入数字来执行你的操作"))
+    if i_startcho == 0:
         cls()  # 220701 GONGYE Heyu
         print("感谢使用,再见")
-    elif startcho == 1:
+    elif i_startcho == 1:
         cls()  # 220701 GONGYE Heyu
         apps()
-    elif startcho == 2:
+    elif i_startcho == 2:
         cls()  # 220701 GONGYE Heyu
         clock()
     else:
@@ -101,26 +100,26 @@ def apps():
     00.关于
     ''')
     # “时钟” 220701 GONGYE Heyu
-    appscho = int(input("请输入"))
-    if appscho == 1:
+    i_appscho = int(input("请输入"))
+    if i_appscho == 1:
         系统信息()
-    elif appscho == 2:
+    elif i_appscho == 2:
         # 本地连接()
         网络信息()  # 220701 GONGYE Heyu
-    elif appscho == 3:
+    elif i_appscho == 3:
         清理垃圾()
-    elif appscho == 4:
+    elif i_appscho == 4:
         # 写入文件()
         文件编辑()  # 220701 GONGYE Heyu
-    elif appscho == 5:
+    elif i_appscho == 5:
         Windows修复()
-    elif appscho == 6:
+    elif i_appscho == 6:
         随机字符生成()
-    elif appscho == 7:
+    elif i_appscho == 7:
         clock()  # 220701 GONGYE Heyu    
-    elif appscho == 0:
+    elif i_appscho == 0:
         start()
-    elif appscho == 00:
+    elif i_appscho == 00:
         关于()
     
     else:
@@ -147,11 +146,11 @@ def 系统信息():
 def 网络信息():
     cls()
     # 获取本机计算机名称
-    hostname = socket.gethostname()
+    s_hostname = socket.gethostname()
     # 获取本机ip
-    ip = socket.gethostbyname(hostname)
-    print("主机名" + hostname)
-    print("IP地址" + ip)
+    s_ip = socket.gethostbyname(s_hostname)
+    print("主机名" + s_hostname)
+    print("IP地址" + s_ip)
     if sysinfo("s_system") == "Windows":
         print(os.system('netstat -sera'))
         print(os.system('ipconfig /all'))
@@ -282,8 +281,8 @@ def clock():
         main()
 
 def debuginfo():
-    print("版本:" + str(ver))
-    print("加载耗时:" + str(ti-ti0))
+    print("版本:" + str(s_ver))
+    print("加载耗时:" + str(f_ti-f_ti0))
     import time
     print("时间:" + str(time.time()))
     print("系统信息:" + str(sysinfo("x_uname")))
@@ -303,22 +302,22 @@ def 关于():
     c.加载耗时
     d.调试信息
     z.返回''')
-    i = input()
-    if i == 'a':
+    s_i = input()
+    if s_i == 'a':
         cls()
         print(license)
         back(3)  # 220716 GONGYE Heyu
-    elif i == 'b':
+    elif s_i == 'b':
         cls()
         print(uplog)
         back(3)  # 220716 GONGYE Heyu
-    elif i == 'c':
-        global ti0
-        global ti
+    elif s_i == 'c':
+        global f_ti0
+        global f_ti
         cls()
-        print(ti-ti0)
+        print(f_ti-f_ti0)
         back(3)
-    elif i == 'd':
+    elif s_i == 'd':
         cls()
         debuginfo()
         back(3)
@@ -331,6 +330,7 @@ def cls():
 
 
 def back(where):
+    import sys
     w = sys._getframe(1).f_code.co_name
     # where=0为直接返回主菜单，where=1为询问后返回主菜单#
     # where=2为直接返回上一级菜单,where=3为询问后返回上一级菜单
@@ -357,6 +357,12 @@ def back(where):
 
 uplog = '''
 更新日志：
+2023.10.1
+1.优化在Windows和Linux的兼容性
+2.新增调试信息选项，加载耗时移动到调试信息下
+3.调整变量命名规则
+4.
+
 2023.7.12
 1.弃用软件查询
 2.将原“IP地址”合并到“网络信息”，改“IP地址”为“系统信息”
@@ -382,10 +388,10 @@ license = "已撤销"
 
 def t():
     import time
-    t = time.time()
-    return t
+    f_t = time.time()
+    return f_t
 
 
-ti = t()
+f_ti = t()
 
 start()
