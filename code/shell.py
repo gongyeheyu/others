@@ -10,9 +10,11 @@ def main():
     s_mainame = "medor-shell"
     s_ver = "23.a28w"
     print(s_mainame+" "+s_ver)
+
     l_in_cmd = ["exit", "mtime"]
     import os
     l_out_cmd = os.listdir("/usr/bin")
+    
     while True:
         # 获取用户输入
         s_in = input("]>")
