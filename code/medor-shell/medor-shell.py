@@ -2,6 +2,7 @@ import subprocess
 import os
 
 d_in = {}
+g_d_in = {}
 s_mainame = "medor-shell"
 s_ver = "23.1028w"
 s_in = None
@@ -51,17 +52,18 @@ def help():
    print("24. mv - 移动文件或目录")
    return 0
 
-def cd(d_in):
+def cd():
    #print(d_in)
+   global g_d_in
    while True:
-       if d_in[1] == "..":
+       if g_d_in[1] == "..":
            os.chdir("..")
-       elif d_in[1] == "~":
+       elif g_d_in[1] == "~":
            os.chdir("~")
-       elif d_in[1] == ".":
+       elif g_d_in[1] == ".":
            os.chdir(".")
        else:
-           os.chdir(d_in[1])
+           os.chdir(g_d_in[1])
        break
    return 0
 
@@ -84,6 +86,8 @@ def main():
             d_in[i] = ls_in[i]
         ls_cmd = ls_in[0]
         ls_arg1 = ls_in[1:]
+        global g_d_in
+        g_d_in = d_in
 
         # 执行命令
         if d_in[0] in l_in_cmd or d_in[0] in l_out_cmd:
@@ -97,7 +101,7 @@ def main():
             elif d_in[0] == "help":
                 help()
             elif d_in[0] == "cd":
-                cd(d_in)
+                cd()
                 
             else:
                 try:
