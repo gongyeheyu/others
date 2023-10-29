@@ -1,4 +1,5 @@
-public class neww{
+package test;
+public class test{
     public static void main(String[] args) {
         // 获取操作系统和版本信息
          
