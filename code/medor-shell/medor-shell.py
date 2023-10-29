@@ -2,7 +2,7 @@ import subprocess
 
 def main():
     s_mainame = "medor-shell"
-    s_ver = "23.a28w"
+    s_ver = "23.1028w"
     print(s_mainame+" "+s_ver)
     while True:
         # 获取用户输入
