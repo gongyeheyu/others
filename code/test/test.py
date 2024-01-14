@@ -9,4 +9,17 @@ def b():
     file_list = os.listdir("/usr/bin")
     print(file_list)
     print(type(file_list))
-b()
+
+def aaa():
+    print("aaa")
+
+def bbb():
+    print("bbb")
+options = {
+    1: aaa,
+    2: bbb,}
+i_appscho = int(input("请输入"))
+if i_appscho in options:
+    options[i_appscho]()
+else:
+    input("输入错误")
