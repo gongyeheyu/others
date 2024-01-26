@@ -4,11 +4,12 @@ import os
 d_in = {}
 g_d_in = {}
 s_mainame = "medor-shell"
-s_ver = "23.1119w"
+s_ver = "24w"
 s_in = None
 ls_in = None
 
 s_work_dir = os.getcwd()
+s_home_dir = s_work_dir #锁定s_home_dir
 s_user = os.getlogin()
 import datetime
 current_time = datetime.datetime.now()
@@ -18,7 +19,7 @@ def mtime():
     return 0
 
 def history(s_in):
-   with open("history.txt", "a") as f:
+   with open(s_home_dir + "history.txt", "a") as f:
        f.write(str(current_time) + " " + s_in + "\n")
    return 0
 
@@ -56,31 +57,23 @@ def help():
    return 0
 
 def cd():
-   #print(d_in)
    global g_d_in
    while True:
-       if g_d_in[1] == "..":
-           os.chdir("..")
-       elif g_d_in[1] == "~":
-           os.chdir("~")
-       elif g_d_in[1] == ".":
-           os.chdir(".")
-       else:
-           os.chdir(g_d_in[1])
+       #if g_d_in[1] == "..":
+       #    os.chdir("..")
+       #elif g_d_in[1] == "~":
+       #    os.chdir("~")
+       #elif g_d_in[1] == ".":
+       #    os.chdir(".")
+       #else:
+       #    os.chdir(g_d_in[1])
        break
    return 0
 
-def environ(mode, s_set_environ_name, s_set_environ_value):
-    if mode == "set":
-        os.environ[s_set_environ_name] = s_set_environ_value
-    elif mode == "print":
-        s_set_environ_value = os.environ[s_set_environ_name]
-        print(s_set_environ_value)
-    return 0
-
 def main():
     print(s_mainame+" "+s_ver)
-    l_in_cmd = ["exit", "mtime", "history", "clear", "help", "cd", "set", "export"]
+    l_in_cmd = ["exit", "mtime", "history", "clear", "help", "cd",]
+    d_in_cmd = {1:exit, 2:mtime, 3:history, 4:clear, 5:help, 6:cd, }
     import os
     l_out_cmd = os.listdir("/usr/bin")
     
@@ -95,39 +88,28 @@ def main():
         # 解析输入
         d_in = {}
         ls_in = s_in.split()
-        i_in_len = len(ls_in)
-        for i in range(i_in_len):
+        i_len_in = len(ls_in)
+        for i in range(i_len_in):
             d_in[i] = ls_in[i]
-        ls_cmd = ls_in[0]
-        ls_arg1 = ls_in[1:]
-        global g_d_in
-        g_d_in = d_in
+        #global g_d_in
+        #g_d_in = d_in
+
+        k = 1
+        for k in d_in_cmd:
+            if d_in_cmd[k] == ls_in[0]:
+                continue
 
         # 执行命令
-        if d_in[0] in l_in_cmd or d_in[0] in l_out_cmd:
-            #print(d_in)
-            if d_in[0] == "exit":
-                break
-            elif d_in[0] == "mtime":
-                mtime()
-            elif d_in[0] == "clear":
-                clear()
-            elif d_in[0] == "help":
-                help()
-            elif d_in[0] == "cd":
-                cd()
-            elif d_in[0] == "set":
-                environ("set", d_in[1], d_in[2])
-            elif d_in[0] == "export":
-                environ("export", d_in[1], None)
-                
-            else:
-                try:
-                    # 调用系统命令
-                    output = subprocess.check_output(s_in ,shell=True)
-                    print(output.decode())
-                except Exception as e:
-                    print("E:", e)
+        if d_in[0] in l_in_cmd:
+            d_in_cmd[k]()
+       
+        elif ls_in[0] in l_out_cmd:
+            try:
+                # 调用系统命令
+                output = subprocess.check_output(s_in ,shell=True)
+                print(output.decode())
+            except Exception as e:
+                print("E:", e)
                     
         else:
             print("E:", "command not found")

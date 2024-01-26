@@ -78,9 +78,6 @@ def apps():
     1.开始
     2.系统信息
     3.网络信息
-    4.清理垃圾
-    5.文件编辑（已弃用）
-    6.Windows修复
     7.随机字符生成 
     8.时钟           
     0.关于
@@ -89,8 +86,6 @@ def apps():
         1: start,
         2: 系统信息,
         3: 网络信息,
-        4: 清理垃圾,
-        6: Windows修复,
         7: 随机字符生成,
         8: clock,
         0: 关于,}
@@ -131,20 +126,6 @@ def 网络信息():
         print(os.system('ipconfig /all'))
     back(1)  # 220716 GONGYE Heyu
 # 220701 GONGYE Heyu
-
-def 清理垃圾():
-    print("开发中...")
-    back(1)
-
-def Windows修复():
-    cls()
-    import os
-    s_system = sysinfo("s_system")
-    if s_system == "Linux":
-        print("不可用")
-    elif s_system == "Windows":
-        os.system("sfc /scannow")
-    back(1)
 
 def 随机字符生成():
     cls()
@@ -288,7 +269,8 @@ uplog = '''
 更新日志：
 2024.1.14
 1.弃用“文件编辑”
-
+2.弃用“Windows修复”
+3.弃用“清理垃圾”
 
 2023.10.1
 1.优化在Windows和Linux的兼容性
